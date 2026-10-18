@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For you 🌸</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:system-ui,sans-serif;color:#70485b;background:linear-gradient(135deg,#fff7fb,#f8d4e5);text-align:center}
+.page{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;overflow:hidden}
+.page.active{display:flex;animation:appear .7s}
+@keyframes appear{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
+h1{font-size:clamp(26px,7vw,40px);color:#bd6089}
+p{line-height:1.7}
+button{font:inherit;cursor:pointer}
+#page1{background:radial-gradient(circle,#fff,#ffe5f0)}
+.bouquet{position:relative;width:min(90vw,360px);height:350px;border:0;background:transparent}
+.wrapper{position:absolute;left:23%;top:48%;width:54%;height:45%;background:linear-gradient(120deg,#fff9f4,#eac1d4);clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)}
+.stem{position:absolute;left:49%;top:37%;height:50%;width:5px;background:#64936d;transform:rotate(4deg)}
+.flower{position:absolute;font-size:55px;transition:.7s}
+.f1{left:20%;top:15%}.f2{left:57%;top:9%}.f3{left:39%;top:0}.f4{left:39%;top:28%}
+#bouquet.open .f1{left:0;top:5%}
+#bouquet.open .f2{left:75%;top:5%}
+#bouquet.open .f3{left:0;top:40%}
+#bouquet.open .f4{left:75%;top:40%}
+.photos{position:absolute;inset:0;pointer-events:none}
+.photos img{position:absolute;width:29%;height:130px;object-fit:cover;border:4px solid white;border-radius:12px;box-shadow:0 8px 25px #ad668044;opacity:0;transform:scale(.4);transition:.6s;pointer-events:none}
+.photos img.show{opacity:1;transform:scale(1);pointer-events:auto}
+.photos img:nth-child(1){left:0;top:0;rotate:-6deg}
+.photos img:nth-child(2){right:0;top:0;rotate:6deg}
+.photos img:nth-child(3){left:0;bottom:0;rotate:4deg}
+.photos img:nth-child(4){right:0;bottom:0;rotate:-5deg}
+#page2{background:radial-gradient(circle,#fff7fc,#edc9ed)}
+.space{width:100%;max-width:450px;display:flex;align-items:center;flex-direction:column;gap:18px;transition:transform .12s}
+.orb{font-size:75px;width:145px;height:145px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 30% 25%,white,#f7a6cb,#bd77c2);box-shadow:0 0 35px #ec9acb;animation:float 4s infinite}
+@keyframes float{50%{translate:0 -12px;rotate:5deg}}
+.wish{padding:18px;border:1px solid white;border-radius:20px;background:#ffffffb8;box-shadow:0 10px 25px #b45e8a1b;max-width:350px}
+.wish h2{color:#b64e7a}
+.petal{position:fixed;top:-30px;z-index:10;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(600deg);opacity:0}}
+#page3{background:linear-gradient(#fff8fa,#f4ccdd)}
+.envelope{position:relative;width:min(82vw,330px);height:210px;margin-top:35px;background:#f2bfd2;box-shadow:0 15px 30px #98536b30;cursor:pointer}
+.paper{position:absolute;z-index:2;left:7%;right:7%;bottom:8px;height:185px;padding:15px;background:#fffdf7;overflow:auto;text-align:left;font-size:14px;line-height:1.7;transition:transform .9s,height .6s}
+.flap{position:absolute;inset:0;z-index:4;background:#ffe5ef;clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:transform .7s}
+.front{position:absolute;inset:0;z-index:3;background:#efb5cc;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}
+.seal{position:absolute;z-index:5;top:42%;left:45%;font-size:35px;transition:.3s}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0}
+.envelope.open .paper{transform:translateY(-120px);height:min(48vh,380px);z-index:6}
+.paper h2{text-align:center;color:#b64e7a}
+#page4{background:radial-gradient(circle,#fff,#ffe3ef)}
+.final{padding:28px 22px;border-radius:25px;background:#ffffffad;border:1px solid white;max-width:370px}
+.final .flower-end{font-size:75px;animation:float 3s infinite}
+.primary{padding:12px 22px;border:0;border-radius:30px;background:#d978a1;color:white}
+.hint{font-size:12px;opacity:.7}
+</style>
+</head>
+<body>
+
+<section class="page active" id="page1">
+  <h1>Một bó hoa nhỏ dành cho C 🌷</h1>
+  <div style="position:relative;width:min(90vw,360px)">
+    <button class="bouquet" id="bouquet" aria-label="Mở bó hoa">
+      <div class="stem"></div><div class="wrapper"></div>
+      <span class="flower f1">🌸</span>
+      <span class="flower f2">🌷</span>
+      <span class="flower f3">🌹</span>
+      <span class="flower f4">🌼</span>
+    </button>
+    <div class="photos">
+      <img src="images/photo1.png" alt="Ảnh 1">
+      <img src="images/photo2.jpg" alt="Ảnh 2">
+      <img src="images/photo3.jpg" alt="Ảnh 3">
+      <img src="images/photo4.jpg" alt="Ảnh 4">
+    </div>
+  </div>
+  <p id="hint1">Chạm vào bó hoa để khám phá bí mật 💗</p>
+  <p class="hint">Chạm ra ngoài để sang trang tiếp theo</p>
+</section>
+
+<section class="page" id="page2">
+  <div class="space" id="space">
+    <div class="orb">🌸</div>
+    <div class="wish">
+      <h2>Chúc C 20/10 vui vẻ!</h2>
+      <p>Mong C luôn vui vẻ, bình an, gặp nhiều điều dễ thương và có thật nhiều lý do để cười mỗi ngày.</p>
+    </div>
+    <div class="wish">
+      <p>Chúc những điều C mong đợi sẽ dần thành hiện thực. Dù bận đến đâu cũng nhớ nghỉ ngơi và đối xử dịu dàng với bản thân nha 💗</p>
+    </div>
+    <p class="hint">Vuốt màn hình để xoay không gian · Chạm ngoài để tiếp tục</p>
+  </div>
+</section>
+
+<section class="page" id="page3">
+  <h1>Một lá thư nhỏ 💌</h1>
+  <p>Trong phong bao này có vài lời t muốn gửi riêng cho C.</p>
+  <div class="envelope" id="envelope" role="button" tabindex="0">
+    <div class="paper">
+      <h2>Gửi C 🌷</h2>
+      <p>Chúc C có một ngày 20/10 thật vui vẻ nha. Mong C luôn giữ được nụ cười của mình, gặp được nhiều người tốt và có thật nhiều khoảnh khắc đáng nhớ.</p>
+      <p>Cảm ơn C vì đã góp vào những ngày đi học của t vài chuyện vui và những kỷ niệm nhỏ. T đã dành thời gian làm món quà này với mong muốn C sẽ mỉm cười khi mở ra.</p>
+      <p>Chúc C luôn vui, luôn bình an và làm được những điều C thích. Nhớ chăm sóc bản thân thật tốt nha. 💗</p>
+      <p style="text-align:right;color:#b64e7a">— Một người bạn gửi C</p>
+    </div>
+    <div class="flap"></div><div class="front"></div><div class="seal">♥</div>
+  </div>
+  <p id="hint3" class="hint">Chạm vào phong bao để mở thư</p>
+  <p class="hint">Chạm ngoài để sang trang cuối</p>
+</section>
+
+<section class="page" id="page4">
+  <div class="final">
+    <div class="flower-end">🌸</div>
+    <p>Một chút dịu dàng gửi đến ngày hôm nay</p>
+    <h1>Happy 20/10 💗</h1>
+    <p>Chúc C luôn có thật nhiều niềm vui, hôm nay và cả những ngày bình thường nữa.</p>
+    <p>🌷 ✨ 🌷</p>
+    <button class="primary" id="restart">Xem lại từ đầu</button>
+  </div>
+</section>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+let current=0, bouquetOpened=false, envelopeOpened=false, petalTimer=null;
+function showPage(n){
+  current=n;
+  pages.forEach((p,i)=>p.classList.toggle('active',i===current));
+  if(current===1)startPetals();else stopPetals();
+}
+function openBouquet(){
+  bouquetOpened=true;
+  document.getElementById('bouquet').classList.add('open');
+  document.querySelectorAll('.photos img').forEach((img,i)=>{
+    setTimeout(()=>img.classList.add('show'),i*250);
+  });
+  document.getElementById('hint1').textContent='Bốn bức ảnh nhỏ dành riêng cho C 💗';
+}
+document.getElementById('bouquet').addEventListener('click',e=>{
+  e.stopPropagation();openBouquet();
+});
+function openEnvelope(){
+  envelopeOpened=true;
+  document.getElementById('envelope').classList.add('open');
+  document.getElementById('hint3').textContent='Lá thư đã được mở 💌';
+}
+document.getElementById('envelope').addEventListener('click',e=>{
+  e.stopPropagation();openEnvelope();
+});
+document.getElementById('envelope').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope();}
+});
+document.body.addEventListener('click',e=>{
+  if(e.target.closest('#bouquet')||e.target.closest('.photos img')||
+     e.target.closest('#envelope')||e.target.closest('#restart'))return;
+  if(current===0&&!bouquetOpened){openBouquet();return;}
+  if(current===2&&!envelopeOpened){openEnvelope();return;}
+  if(current<3)showPage(current+1);
+});
+function makePetal(){
+  const p=document.createElement('span');
+  p.className='petal';
+  p.textContent=['🌸','🌷','✿','💗'][Math.floor(Math.random()*4)];
+  p.style.left=Math.random()*100+'vw';
+  p.style.fontSize=(12+Math.random()*18)+'px';
+  p.style.animationDuration=(5+Math.random()*6)+'s';
+  p.style.setProperty('--drift',((Math.random()-.5)*180)+'px');
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),12000);
+}
+function startPetals(){
+  if(petalTimer)return;
+  for(let i=0;i<10;i++)setTimeout(makePetal,i*180);
+  petalTimer=setInterval(makePetal,450);
+}
+function stopPetals(){
+  clearInterval(petalTimer);petalTimer=null;
+  document.querySelectorAll('.petal').forEach(p=>p.remove());
+}
+const space=document.getElementById('space');
+let sx=0,sy=0,rx=0,ry=0;
+space.addEventListener('touchstart',e=>{
+  sx=e.touches[0].clientX;sy=e.touches[0].clientY;
+},{passive:true});
+space.addEventListener('touchmove',e=>{
+  if(current!==1)return;
+  const t=e.touches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  sx=t.clientX;sy=t.clientY;
+  ry=Math.max(-22,Math.min(22,ry+dx*.12));
+  rx=Math.max(-18,Math.min(18,rx-dy*.1));
+  space.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+},{passive:true});
+space.addEventListener('mousemove',e=>{
+  if(current!==1)return;
+  const r=space.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  space.style.transform=`rotateX(${-y*12}deg) rotateY(${x*15}deg)`;
+});
+document.getElementById('restart').addEventListener('click',e=>{
+  e.stopPropagation();
+  bouquetOpened=false;envelopeOpened=false;
+  document.getElementById('bouquet').classList.remove('open');
+  document.querySelectorAll('.photos img').forEach(img=>img.classList.remove('show'));
+  document.getElementById('envelope').classList.remove('open');
+  document.getElementById('hint1').textContent='Chạm vào bó hoa để khám phá bí mật 💗';
+  document.getElementById('hint3').textContent='Chạm vào phong bao để mở thư';
+  showPage(0);
+});
+</script>
+</body>
+</html>
